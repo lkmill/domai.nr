@@ -1,0 +1,22 @@
+{
+  "name": "domai.nr",
+  "version": "0.0.1",
+  "description": "CLI for the domai.nr API (at Mashape.com)",
+  "main": "index.js",
+  "bin": {
+    "domai.nr": "domai.nr.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lohfu/domai.nr.git"
+  },
+  "author": "Linus Miller <lohfu@lohfu.io> (https://lohfu.io/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lohfu/domai.nr/issues"
+  },
+  "homepage": "https://github.com/lohfu/domai.nr#readme"
+}
