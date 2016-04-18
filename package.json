@@ -4,9 +4,11 @@
   "description": "CLI for the domai.nr API (at Mashape.com)",
   "main": "index.js",
   "bin": {
-    "domai.nr": "domai.nr.js"
+    "domai.nr": "bin/domai.nr.js"
   },
   "scripts": {
+    "tmp": "bin/domai.nr.js poopr asdfasdqwerqwerqwerqwer | tap-spec",
+    "which": "which tap-spec",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,5 +20,14 @@
   "bugs": {
     "url": "https://github.com/lohfu/domai.nr/issues"
   },
-  "homepage": "https://github.com/lohfu/domai.nr#readme"
+  "homepage": "https://github.com/lohfu/domai.nr#readme",
+  "dependencies": {
+    "commander": "^2.9.0",
+    "figures": "^1.5.0",
+    "pretty-ms": "^2.1.0",
+    "superagent": "^1.8.3",
+    "tap-out": "^1.4.2",
+    "tape": "^4.5.1",
+    "through2": "^2.0.1"
+  }
 }
