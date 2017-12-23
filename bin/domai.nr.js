@@ -7,11 +7,13 @@ const fs = require('fs')
 const p = require('path')
 
 // modules > 3rd party
-const transform = require('../transform')()
-const request = require('superagent')
+const _ = require('lodash')
+const rek = require('rek')
 const program = require('commander')
 const test = require('tape')
 
+// modules > local
+const transform = require('../transform')()
 const TLDS = require('../tlds.json')
 
 function list (input) {
@@ -70,20 +72,20 @@ if (program.args.length === 0) {
   program.exit()
 }
 
-domains.sort()
+const headers = {
+  'X-Mashape-Key': program.key,
+  'Accept': 'application/json',
+}
 
 test('Domains', function (t) {
-  request.get('https://domainr.p.mashape.com/v2/status?domain=' + domains.join(','))
-    .set('X-Mashape-Key', program.key)
-    .set('Accept', 'application/json')
-    .end((err, res) => {
-      if (err) {
-        console.error(err)
-        // TODO decide what error code
-        return process.exit(2)
-      }
+  const arrays = _.chunk(domains, 10)
 
-      res.body.status.sort((a, b) => {
+  Promise.all(arrays.map((arr) => rek('https://domainr.p.mashape.com/v2/status?domain=' + arr.join(','), { headers })))
+    .then((results) => {
+      results = results.map((result) => result.status)
+      results = [].concat(...results)
+
+      results.sort((a, b) => {
         if (a.domain < b.domain) {
           return -1
         }
@@ -98,5 +100,10 @@ test('Domains', function (t) {
       })
 
       t.end()
+    })
+    .catch((err) => {
+      console.error(err)
+      // TODO decide what error code
+      return process.exit(2)
     })
 })
