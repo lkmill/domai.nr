@@ -4,12 +4,15 @@
 
 // modules > native
 const fs = require('fs');
+const p = require('path');
 
 //modules > 3rd party
 const transform = require('../transform')();
 const request = require('superagent');
 const program = require('commander');
 const test = require('tape');
+
+const TLDS = require('../tlds.json');
 
 function list(input) {
   return input.split(',');
@@ -32,27 +35,37 @@ program
   .option('-c, --config <path>', 'Location of domainr configuration file', '~/.domainrrc')
   .option('-k, --key <value>', 'Mashape API Key for Domai.nr')
   .option('-t, --tlds <items>', 'Comma seperated list of top level domains', list)
+  .option('-T <items>', 'Comma seperated list of top level domains', list)
   .option('-a, --all', 'Use ALL tLDs (overrides --tlds)')
   .parse(process.argv);
 
-const config = JSON.parse(fs.readFileSync('/home/sup3rman/.domainrrc', 'utf8'));
+const config = JSON.parse(fs.readFileSync(p.join(process.env.HOME, '.domainrrc'), 'utf8'));
+
+Object.assign(TLDS, config.tlds);
+
+const tlds = program.tlds || [];
 
 program.key = program.key || config.key;
-program.tlds = program.tlds || config.tlds;
-
-if (program.args.length === 0) {
-  program.help();
-  program.exit();
-}
 
 let domains = [];
+
+if (program.T)
+  program.T.forEach((group) => {
+    if (TLDS[group])
+      tlds.push(...TLDS[group]);
+  });
 
 program.args.forEach((domain) => {
   if (domain.indexOf('.') > -1)
     domains.push(domain);
   else
-    domains = domains.concat(program.tlds.map((tld) => domain + '.' + tld));
+    domains = domains.concat(tlds.map((tld) => domain + '.' + tld));
 });
+
+if (program.args.length === 0) {
+  program.help();
+  program.exit();
+}
 
 domains.sort();
 
@@ -67,7 +80,17 @@ test('Domains', function (t) {
         return process.exit(2);
       }
 
-      res.body.status.forEach(function (status) {
+      res.body.status.sort((a, b) => {
+        if (a.domain < b.domain) {
+          return -1;
+        }
+        if (a.domain > b.domain) {
+          return 1;
+        }
+
+        // names must be equal
+        return 0;
+      }).forEach(function (status) {
         t.equal(status.summary, 'inactive', status.domain);
       });
 
