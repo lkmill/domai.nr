@@ -1,2 +1,3 @@
 # domai.nr
-CLI for the domai.nr API (at Mashape.com)
+
+CLI for the domai.nr API (through RapidAPI.com)
