@@ -81,7 +81,7 @@ const headers = {
 test('Domains', function (t) {
   const arrays = _.chunk(domains, 10)
 
-  Promise.all(arrays.map((arr) => rek('https://domainr.p.rapidapi.com/v2/status?domain=' + arr.join(','), { headers })))
+  Promise.all(arrays.map((arr) => rek('https://domainr.p.rapidapi.com/v2/status?domain=' + arr.join(','), { headers }).json()))
     .then((results) => {
       results = results.map((result) => result.status)
       results = [].concat(...results)
