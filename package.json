@@ -23,6 +23,7 @@
   "homepage": "https://github.com/lohfu/domai.nr#readme",
   "dependencies": {
     "commander": "^2.9.0",
+    "duplexer": "^0.1.1",
     "figures": "^1.5.0",
     "lodash": "^4.17.4",
     "pretty-ms": "^2.1.0",
