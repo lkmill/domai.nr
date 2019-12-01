@@ -73,7 +73,6 @@ if (program.args.length === 0) {
 }
 
 const headers = {
-  'Accept': 'application/json',
   'x-rapidapi-host': 'domainr.p.rapidapi.com',
   'x-rapidapi-key': program.key,
 }
