@@ -23,23 +23,23 @@
   },
   "homepage": "https://github.com/lohfu/domai.nr#readme",
   "dependencies": {
-    "chalk": "^4.1.2",
-    "commander": "^4.0.1",
+    "chalk": "^5.0.1",
+    "commander": "^9.4.0",
     "duplexer": "^0.1.1",
-    "figures": "^3.1.0",
+    "figures": "^5.0.0",
     "lodash": "^4.17.4",
-    "pretty-ms": "^5.1.0",
-    "rek": "^0.4.3",
+    "pretty-ms": "^8.0.0",
+    "rek": "^0.8.0",
     "tap-out": "^3.0.0",
-    "tape": "^4.5.1",
-    "through2": "^3.0.1"
+    "tape": "^5.6.0",
+    "through2": "^4.0.2"
   },
   "devDependencies": {
-    "eslint": "^6.7.2",
-    "eslint-config-standard": "^14.1.0",
+    "eslint": "^8.23.1",
+    "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-node": "^10.0.0",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.1"
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.0.1",
+    "eslint-plugin-standard": "^5.0.0"
   }
 }

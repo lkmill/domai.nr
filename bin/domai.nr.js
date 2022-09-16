@@ -7,7 +7,7 @@ import p from 'path'
 // modules > 3rd party
 import _ from 'lodash'
 import rek from 'rek'
-import program from 'commander'
+import { program } from 'commander'
 import test from 'tape'
 
 // modules > local
@@ -45,8 +45,10 @@ const config = JSON.parse(fs.readFileSync(p.join(process.env.HOME, '.domainrrc')
 
 Object.assign(TLDS, config.tlds)
 
-const tlds = program.tlds || []
-const key = program.key || config.key
+const opts = program.opts()
+
+const tlds = opts.tlds || []
+const key = opts.key || config.key
 
 if (!key) {
   console.error('An API key is required!')
@@ -55,8 +57,8 @@ if (!key) {
 
 let domains = []
 
-if (program.T) {
-  program.T.forEach((group) => {
+if (opts.T) {
+  opts.T.forEach((group) => {
     if (TLDS[group]) {
       tlds.push(...TLDS[group])
     }
@@ -84,7 +86,7 @@ const headers = {
 test('Domains', function (t) {
   const arrays = _.chunk(domains, 10)
 
-  Promise.all(arrays.map((arr) => rek('https://domainr.p.rapidapi.com/v2/status?domain=' + arr.join(','), { headers }).json()))
+  Promise.all(arrays.map((arr) => rek('https://domainr.p.rapidapi.com/v2/status?domain=' + arr.join(','), { headers })))
     .then((results) => {
       results = results.map((result) => result.status)
       results = [].concat(...results)
