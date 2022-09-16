@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/lohfu/domai.nr#readme",
   "dependencies": {
+    "chalk": "^4.1.2",
     "commander": "^4.0.1",
     "duplexer": "^0.1.1",
     "figures": "^3.1.0",
