@@ -1,15 +1,13 @@
-'use strict'
-
 // cannot remember if i made this myself or copied it from somewhere
-const tapOut = require('tap-out')
-const through = require('through2')
-const duplexer = require('duplexer')
-const format = require('chalk')
-const prettyMs = require('pretty-ms')
-const _ = require('lodash')
-const symbols = require('figures')
+import tapOut from 'tap-out'
+import through from 'through2'
+import duplexer from 'duplexer'
+import format from 'chalk'
+import prettyMs from 'pretty-ms'
+import _ from 'lodash'
+import symbols from 'figures'
 
-module.exports = function (spec) {
+export default function (spec) {
   spec = spec || {}
 
   const OUTPUT_PADDING = spec.padding || '  '

@@ -1,26 +1,26 @@
 #!/bin/env node
 
-'use strict'
-
 // modules > native
-const fs = require('fs')
-const p = require('path')
+import fs from 'fs'
+import p from 'path'
 
 // modules > 3rd party
-const _ = require('lodash')
-const rek = require('rek')
-const program = require('commander')
-const test = require('tape')
+import _ from 'lodash'
+import rek from 'rek'
+import program from 'commander'
+import test from 'tape'
 
 // modules > local
-const transform = require('../transform')()
-const TLDS = require('../tlds.json')
+import Transform from '../transform.js'
+import TLDS from '../tlds.json' assert { type: 'json' }
+import pkg from '../package.json' assert { type: 'json' }
+
+const transform = Transform()
 
 function list (input) {
   return input.split(',')
 }
 
-const pkg = require('../package.json')
 
 /* TODO fix formatting totals (stream seems to end before tape outputs the
  * results, however tape outputs it correctly if you pipe straight to stdout
