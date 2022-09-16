@@ -46,8 +46,12 @@ const config = JSON.parse(fs.readFileSync(p.join(process.env.HOME, '.domainrrc')
 Object.assign(TLDS, config.tlds)
 
 const tlds = program.tlds || []
+const key = program.key || config.key
 
-program.key = program.key || config.key
+if (!key) {
+  console.error('An API key is required!')
+  process.exit(2)
+}
 
 let domains = []
 
@@ -74,7 +78,7 @@ if (program.args.length === 0) {
 
 const headers = {
   'x-rapidapi-host': 'domainr.p.rapidapi.com',
-  'x-rapidapi-key': program.key,
+  'x-rapidapi-key': key,
 }
 
 test('Domains', function (t) {
