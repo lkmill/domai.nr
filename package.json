@@ -8,8 +8,6 @@
     "domai.nr": "bin/domai.nr.js"
   },
   "scripts": {
-    "tmp": "bin/domai.nr.js poopr asdfasdqwerqwerqwerqwer | tap-spec",
-    "which": "which tap-spec",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
