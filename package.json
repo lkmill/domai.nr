@@ -1,6 +1,6 @@
 {
   "name": "domai.nr",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "CLI for the domai.nr API (at Mashape.com)",
   "main": "index.js",
   "type": "module",
